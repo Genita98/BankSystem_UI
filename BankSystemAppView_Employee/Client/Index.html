@@ -72,15 +72,17 @@
          <th>Id Card</th>
          <th>Client name</th>
          <th>Surname</th>
-         <th>Address</th>
-         <th>Phone number</th>
-         <th>Email</th>
          <th>Actions</th>
         </tr>
     </thead>
-    <tbody>
-        <td>.
-    </tbody>
+    <tbody id ="clientTableBody">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            
+         </td>
+       </tbody>
 </table>
 
 </div>
@@ -108,7 +110,7 @@ const authToken = localStorage.getItem('authToken');
 // Check if the token is present before making the API request
 if (authToken) {
     // Assuming there's an endpoint for fetching client details, replace this with your actual endpoint
-    const getClientDetailsUrl = 'https://localhost:7190/User?roleId=3';
+    const getClientDetailsUrl = 'https://localhost:7190/User/client';
     console.log(authToken);
     // Make the API request using fetch
     fetch(getClientDetailsUrl, {
@@ -132,7 +134,7 @@ function handleGetClientDetailsResponse(response) {
     if (response.success) {
         // Client details retrieved successfully
         console.log('Client details:', response.data);
-
+        updateTable (response.data);
         // You can update the UI with the client details or perform other actions.
     } else {
         // Client details retrieval failed
@@ -141,9 +143,56 @@ function handleGetClientDetailsResponse(response) {
 
         // You can display an error message to the user.
     }
-}}
-// Retrieve the token from localStorage
+}
+
+
+}
 
 
 
+
+
+function updateTable(data) {
+    const tableBody = document.getElementById('clientTableBody');
+    tableBody.innerHTML = '';
+
+    const columnsToDisplay = ['idCardNumber', 'name', 'surname'];
+
+    data.forEach(client => {
+        const newRow = tableBody.insertRow();
+
+        columnsToDisplay.forEach(column => {
+            const cell = newRow.insertCell();
+            cell.textContent = client[column] || '';
+        });
+
+        const actionsCell = newRow.insertCell();
+        const buttonsDiv = createButtonsDiv();
+        actionsCell.appendChild(buttonsDiv);
+    });
+}
+
+function createButtonsDiv() {
+    const divElement = document.createElement('div');
+    divElement.className = 'btn-group w-75';
+    divElement.innerHTML = `
+        <a class="btn btn-secondary mx-2" onclick="editRow(this)">Edit <i class="bi bi-pencil-square"></i></a>
+        <a class="btn btn-danger mx-2" onclick="deleteRow(this)">Delete <i class="bi bi-trash"></i></a>
+    `;
+    return divElement;
+}
+
+// Function to handle the edit button click
+function editRow(button) {
+    const row = button.closest('tr');
+    // Implement your edit logic here using the row data
+    console.log('Edit clicked for row:', row);
+}
+
+// Function to handle the delete button click
+function deleteRow(button) {
+    const row = button.closest('tr');
+    // Implement your delete logic here using the row data
+    console.log('Delete clicked for row:', row);
+}
 </script>

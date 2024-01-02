@@ -26,27 +26,28 @@
 
                     <div class="form-floating py-2 col-12">
                         <label class="p-0 text-secondary" asp-for="ClientId">Client Id</label>
-                            <select id="userId" asp-items="ViewBag.ClientList" class="form-select form-control border-0 shadow" >
-                         <option disabled selected id="idCardClient" oninput="generateCurrentAccountNumber()" class="ms-2"> -- Select client -- </option>
+                             <input asp-for="IdCardNumber" id="IdCardNumber" class="form-control border-0 shadow" />
                      </select>
                      <span asp-validation-for="ClientId" class="text-danger"></span>
                  </div>
                    <div class="form-floating py-2 col-12">
-                       <label class="p-0 ms-2 text-secondary" asp-for="pinCode">Valuta</label>
-                         <input asp-for="pinCode" id="pinCode" class="form-control border-0 shadow" oninput="generateCurrentAccountNumber()" />
+                       <label class="p-0 ms-2 text-secondary" asp-for="pinCode">Pin</label>
+                         <input asp-for="pinCode" id="pinCode" class="form-control border-0 shadow" />
                      <span asp-validation-for="pinCode" class="text-danger"></span>
                  </div>
 
                  <div class="form-floating py-2 col-12">
-                       <label class="p-0 ms-2 text-secondary" asp-for="balance">Valuta</label>
-                         <input asp-for="balance" id="balance" class="form-control border-0 shadow" oninput="generateCurrentAccountNumber()" />
+                       <label class="p-0 ms-2 text-secondary" asp-for="balance">Balance</label>
+                         <input asp-for="balance" id="balance" class="form-control border-0 shadow"  />
                      <span asp-validation-for="balance" class="text-danger"></span>
                  </div>
-                 <div class="form-floating py-2 col-12">
-                       <label class="p-0 ms-2 text-secondary" asp-for="valuteId">Valuta</label>
-                         <input asp-for="valuteId" id="valuteId" class="form-control border-0 shadow" oninput="generateCurrentAccountNumber()" />
-                     <span asp-validation-for="valuteId" class="text-danger"></span>
-                 </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 ms-2 text-secondary" asp-for="AccountId">Valuta</label>
+                    <select asp-for="Valuta" id ="valuta" class="form-select form-control shadow border-0" onclick="getDropdownValutes()">
+                          <option id ="valutaId" selected > -- Select valute -- </option>
+                      </select>
+                      <span asp-validation-for="Valuta" class="text-danger"></span>
+                  </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-secondary form-control">Create</button>
@@ -85,7 +86,7 @@
     const ClientValuteValue = document.getElementById("valuteId").value;
 
     console.log(authToken);
-    const AccountUrl = 'https://localhost:7190/Account';
+    const AccountUrl = 'https://localhost:7100/Account';
     const data = {
       userId: ClientUserValue,
       pinCode: ClientPinCodeValue,
@@ -107,19 +108,95 @@
     .then(data => handleCreateClientResponse(data))
     .catch(error => console.error('Error:', error));
 });
-function handleCreateClientResponse(response) {
-    // Handle the response from the create client API endpoint
+function handleGetClientDetailsResponse(response) {
+    // Handle the response from the get client details API endpoint
     if (response.success) {
-        // Client creation successful
-        console.log('Client created successfully:', response.data);
-         window.location.href = '../Account/Index.html';
+        // Client details retrieved successfully
+        console.log('Client details:', response.data);
+        console.log('status: ', response.status);
 
-        // You can perform further actions, such as updating the UI or redirecting.
+        // Get the select element
+        const selectElement = document.getElementById("userId");
+
+        // Clear existing options
+        selectElement.innerHTML = '';
+
+        // Add a default option
+        const defaultOption = document.createElement("option");
+        defaultOption.text = '-- Select client --';
+        defaultOption.disabled = true;
+        defaultOption.selected = true;
+        selectElement.add(defaultOption);
+
+        // Add options based on the client details
+        response.data.forEach(client => {
+            const option = document.createElement("option");
+            option.value = client.clientId;
+            option.text = client.clientName;
+            selectElement.add(option);
+        });
     } else {
-        // Client creation failed
-        const errorMessage = response.errors || 'Client creation failed.';
+        // Client details retrieval failed
+        const errorMessage = response.errors || 'Client details retrieval failed.';
         console.error('Error:', errorMessage);
+
         // You can display an error message to the user.
     }
 }
+
+
+
+
+function getDropdownValutes() {
+    const valutaDropdown = document.getElementById('valuta');
+    const authToken = localStorage.getItem('authToken');
+
+    // Assuming there's an endpoint for fetching valutes, replace this with your actual endpoint
+    const valutesUrl = 'https://localhost:7100/Account/get-valutes-for-dropdown';
+
+
+    // Make the API request using fetch
+    fetch(valutesUrl, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,  // Include the token in the Authorization header
+        },
+    })
+    .then(response => response.json())
+    .then(data => populateValutaDropdown(valutaDropdown, data.data))
+    .catch(error => console.error('Error:', error));
+
+}
+
+
+
+
+function populateValutaDropdown(dropdown, valutes) {
+    // Clear existing options
+    dropdown.innerHTML = '';
+
+    // Add the default option
+    const defaultOption = document.createElement('option');
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    defaultOption.textContent = '-- Select valute --';
+    dropdown.appendChild(defaultOption);
+
+    // Add options for each valute
+    valutes.forEach(valute => {
+        const option = document.createElement('option');
+        option.value = valute.id; // Set the value attribute based on the valute id or other unique identifier
+        option.textContent = valute.name;
+        
+        dropdown.appendChild(option);
+    });
+
+
+
+}
+
+
+
 </script>

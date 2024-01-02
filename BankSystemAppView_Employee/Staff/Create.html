@@ -102,7 +102,7 @@
         method: 'POST',
         headers: {
             'Accept': '*/*',
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            'Authorization': `Bearer ${authToken}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)

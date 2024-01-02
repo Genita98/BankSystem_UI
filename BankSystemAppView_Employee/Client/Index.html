@@ -72,6 +72,9 @@
          <th>Id Card</th>
          <th>Client name</th>
          <th>Surname</th>
+         <th>Email</th>
+         <th>Phone number</th>
+         <th>Address</th>
          <th>Actions</th>
         </tr>
     </thead>
@@ -79,9 +82,10 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>
-            
-         </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
        </tbody>
 </table>
 
@@ -133,10 +137,18 @@ function handleGetClientDetailsResponse(response) {
     // Handle the response from the get client details API endpoint
     if (response.success) {
         // Client details retrieved successfully
-        console.log('Client details:', response.data);
-        updateTable (response.data);
+        //console.log('Client details:', response.data);
+        //updateTable (response.data);
         // You can update the UI with the client details or perform other actions.
-    } else {
+
+        if (response.data && response.data.length > 0) {
+        // Client details retrieved successfully and response.data is not empty
+        console.log('Client details:', response.data);
+        updateTableForClient(response.data);
+        // You can update the UI with the client details or perform other actions.
+    } 
+    }
+     else {
         // Client details retrieval failed
         const errorMessage = response.errors || 'Client details retrieval failed.';
         console.error('Error:', errorMessage);
@@ -152,25 +164,41 @@ function handleGetClientDetailsResponse(response) {
 
 
 
-function updateTable(data) {
+function updateTableForClient(data) {
     const tableBody = document.getElementById('clientTableBody');
     tableBody.innerHTML = '';
 
-    const columnsToDisplay = ['idCardNumber', 'name', 'surname'];
+  
+       data.forEach(client => {
+    // Create a new row for each client
+    const newRow = tableBody.insertRow();
 
-    data.forEach(client => {
-        const newRow = tableBody.insertRow();
+    // Flag to skip the first property (column)
+    let skipFirstColumn = true;
 
-        columnsToDisplay.forEach(column => {
+    // Iterate over the properties in the client object and populate the cells
+    for (const property in client) {
+        if (client.hasOwnProperty(property)) {
+            // Skip the first column
+            if (skipFirstColumn) {
+                skipFirstColumn = false;
+                continue;
+            }
+
             const cell = newRow.insertCell();
-            cell.textContent = client[column] || '';
-        });
+            cell.textContent = `${client[property] || ''}`; // Use empty string if the property is undefined
+        }
+    }
 
-        const actionsCell = newRow.insertCell();
-        const buttonsDiv = createButtonsDiv();
-        actionsCell.appendChild(buttonsDiv);
-    });
+    // Add buttons cell
+    const actionsCell = newRow.insertCell();
+    const buttonsDiv = createButtonsDiv();
+    actionsCell.appendChild(buttonsDiv);
+});
+
+   
 }
+
 
 function createButtonsDiv() {
     const divElement = document.createElement('div');

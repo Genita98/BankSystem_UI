@@ -47,20 +47,36 @@
                 <input id="pin" class="form-control border-0 shadow" autocomplete="new-password" aria-required="true" />
                 <span asp-validation-for="Password" class="text-danger"></span>
               </div>
-              <div class="form-floating mb-3 col-12">
-                <label class="p-0 text-secondary ms-2"  asp-for="Input.Password">Balance</label>
-                <input id="balance" class="form-control border-0 shadow"   />
-                <span asp-validation-for="balance" class="text-danger"></span>
-              </div>
-              <div class="form-floating mb-3 col-12">
-                <label class="p-0 text-secondary ms-2"  asp-for="Input.Password">Valuta</label>
-                <input id="valute" class="form-control border-0 shadow"   />
-                <span asp-validation-for="valute" class="text-danger"></span>
-              </div>
+
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="Address" class="ms-2">Address</label>
+                    <input id="address"  class="form-control border-0 shadow" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="PhoneNumber" class="ms-2">Phone number</label>
+                    <input id="phoneNumber" class="form-control border-0 shadow" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="Email" class="ms-2">Email</label>
+                    <input id="email" class="form-control border-0 shadow" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+
+
+
+
+
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-secondary form-control">Create</button>
                     </div>
+
+
                     <div class="col-6 col-md-3">
                         <a href ="../Client/Index.html" class="btn btn-outline-secondary  form-control">Back</a>
                     </div>
@@ -91,16 +107,13 @@
     const ClientSurnameValue = document.getElementById('Surname').value;
     const idCardClientValue = document.getElementById('IdCardClient').value;
     const ClientPinValue = document.getElementById('pin').value;
-    const ClientBalanceValue = document.getElementById('balance').value;
-    const ClientValutevalue = document.getElementById('valute').value;
+  //  const ClientBalanceValue = document.getElementById('balance').value;
+  //  const ClientValuteValue = document.getElementById('valute').value;
+    const ClientEmailValue = document.getElementById('email').value;
+    const ClientAddressValue = document.getElementById('address').value;
+    const ClientPhoneNumberValue = document.getElementById('phoneNumber').value;
 
 
-    console.log(ClientNameValue);
-    console.log(ClientSurnameValue);
-    console.log(idCardClientValue);
-    console.log(ClientPinValue);
-    console.log(ClientBalanceValue);
-    console.log(ClientValutevalue);
 
     const clientUrl = 'https://localhost:7190/User/client';
     const data = {
@@ -108,8 +121,11 @@
       surname: ClientSurnameValue,
       idCardNumber: idCardClientValue,
       pinCode: ClientPinValue,
-      balance: ClientBalanceValue,
-      valuteId: ClientValutevalue
+      balance: 0,
+      valuteId: 1,
+      email: ClientEmailValue,
+      address: ClientAddressValue,
+      phoneNumber: ClientPhoneNumberValue
     };
 
     // Make the API request using fetch

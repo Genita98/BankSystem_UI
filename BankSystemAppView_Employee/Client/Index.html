@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="~/style/lib/bootstrap/dist/css/bootstrap.css" />
 
 </head>
+    <style>
+  .hidden-td {
+    display: none;
+  }
+</style>
 <body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-sm bg-secondary navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
@@ -68,7 +73,7 @@
 <table class="table table-bordered table-striped text-center">
     <thead>
         <tr>
-
+        <th class="hidden-td"> Id </th>
          <th>Id Card</th>
          <th>Client name</th>
          <th>Surname</th>
@@ -79,6 +84,7 @@
         </tr>
     </thead>
     <tbody id ="clientTableBody">
+        <td class="hidden-td"></td>
         <td></td>
         <td></td>
         <td></td>
@@ -115,7 +121,6 @@ const authToken = localStorage.getItem('authToken');
 if (authToken) {
     // Assuming there's an endpoint for fetching client details, replace this with your actual endpoint
     const getClientDetailsUrl = 'https://localhost:7190/User/client';
-    console.log(authToken);
     // Make the API request using fetch
     fetch(getClientDetailsUrl, {
         method: 'GET',
@@ -172,7 +177,6 @@ function updateTableForClient(data) {
        data.forEach(client => {
     // Create a new row for each client
     const newRow = tableBody.insertRow();
-
     // Flag to skip the first property (column)
     let skipFirstColumn = true;
 
@@ -180,15 +184,18 @@ function updateTableForClient(data) {
     for (const property in client) {
         if (client.hasOwnProperty(property)) {
             // Skip the first column
-            if (skipFirstColumn) {
-                skipFirstColumn = false;
-                continue;
-            }
-
+        //    if (skipFirstColumn) {
+          //      skipFirstColumn = false;
+               // continue;
+            //}
             const cell = newRow.insertCell();
+            if (property === 'id') {
+                    cell.className = 'hidden-td'; // Apply the 'hidden-td' class to hide the column
+                }
             cell.textContent = `${client[property] || ''}`; // Use empty string if the property is undefined
         }
     }
+        console.log(client.id);
 
     // Add buttons cell
     const actionsCell = newRow.insertCell();
@@ -213,8 +220,14 @@ function createButtonsDiv() {
 // Function to handle the edit button click
 function editRow(button) {
     const row = button.closest('tr');
+    const idCell = row.cells[0]; // Assuming the ID is in the first cell (index 0) of the row
+    const id = idCell.textContent.trim(); // Get the text content of the cell and remove leading/trailing whitespace
+    //console.log('Edit clicked for row with ID:', id);
+     window.location.href = `../Client/Edit.html?id=${id}`;
+
+
     // Implement your edit logic here using the row data
-    console.log('Edit clicked for row:', row);
+    //console.log('Edit clicked for row:', row);
 }
 
 // Function to handle the delete button click
@@ -223,4 +236,7 @@ function deleteRow(button) {
     // Implement your delete logic here using the row data
     console.log('Delete clicked for row:', row);
 }
+
+
+
 </script>

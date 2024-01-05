@@ -1,0 +1,332 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="~/style/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/style/lib/bootstrap/dist/css/bootstrap.css" />
+<<<<<<< Updated upstream
+
+</head>
+
+=======
+</head>
+>>>>>>> Stashed changes
+    <style>
+  .hidden-td {
+    display: none;
+  }
+</style>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Edit Client</h2>
+<<<<<<< Updated upstream
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4 d-flex flex-column col-12">
+
+        <form method="put" class="p-4 col-12"> 
+            <div class="border p-3">
+
+=======
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4 d-flex flex-column col-12">
+        <form method="put" class="p-4 col-12"> 
+            <div class="border p-3">
+>>>>>>> Stashed changes
+                <input type ="hidden" id ="id"/>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="IdCardClient" class="ms-2">Id Card</label>
+                    <input id="IdCardClient" disabled class="form-control border-0 shadow" />
+                    <span asp-validation-for="IdCardClient" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="Name" class="ms-2">Name</label>
+                    <input id="name" disabled class="form-control border-0 shadow" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="Surname" class="ms-2">Surname</label>
+                    <input id="surname" class="form-control border-0 shadow" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+                </div>
+               <div class="form-floating mb-3 col-12 hidden-td">
+                <label class="p-0 text-secondary ms-2"  asp-for="Input.Password">Pin</label>
+                <input id="pin" class="form-control border-0 shadow" autocomplete="new-password" aria-required="true" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+              </div>
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="Address" class="ms-2">Address</label>
+                    <input id="address" disabled  class="form-control border-0 shadow" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="PhoneNumber" class="ms-2">Phone number</label>
+                    <input id="phoneNumber" class="form-control border-0 shadow" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <label class="p-0 text-secondary" asp-for="Email" class="ms-2">Email</label>
+                    <input id="email" class="form-control border-0 shadow" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+<<<<<<< Updated upstream
+
+
+
+
+
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" onclick="editFormClient()" class="btn btn-secondary form-control">Edit</button>
+                    </div>
+
+
+=======
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="button" onclick="editFormClient()" class="btn btn-secondary form-control">Edit</button>
+                    </div>
+>>>>>>> Stashed changes
+                    <div class="col-6 col-md-3">
+                        <a href ="../Client/Index.html" class="btn btn-outline-secondary  form-control">Back</a>
+                    </div>
+                </div>
+            </div>
+<<<<<<< Updated upstream
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+</html>
+
+
+
+
+=======
+        </form>
+    </div>
+</div>
+</html>
+
+>>>>>>> Stashed changes
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="..." crossorigin="anonymous"></script>
+
+<<<<<<< Updated upstream
+
+<script>
+// Extract ID from the URL
+console.log('Genita e keqe qitash');
+console.log(idVal);
+console.log('Genita e mir e mir qitash');
+
+if (!idVal){
+console.log('para');
+const urlParams = new URLSearchParams(window.location.search);
+const clientId = urlParams.get('id');
+console.log('pas');
+ const authToken = localStorage.getItem('authToken');
+
+// Check if the token is present before making the API request
+if (authToken) {
+
+    localStorage.setItem('clientId',clientId);
+=======
+<script>
+// Extract ID from the URL
+
+const urlParams = new URLSearchParams(window.location.search);
+const clientId = urlParams.get('id');
+const authToken = localStorage.getItem('authToken');
+
+// Check if the token is present before making the API request
+if (authToken) {
+>>>>>>> Stashed changes
+    // Assuming there's an endpoint for fetching client details, replace this with your actual endpoint
+    const getClientDetailsUrl = `https://localhost:7190/User/${clientId}`;
+    // Make the API request using fetch
+    fetch(getClientDetailsUrl, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`,  // Include the token in the Authorization header
+        },
+    })
+    .then(response => response.json())
+    .then(data => handleGetClientDetailsResponseById(data))
+    .catch(error => console.error('Error:', error));
+} 
+
+<<<<<<< Updated upstream
+
+
+
+
+
+}
+
+function handleGetClientDetailsResponseById(response) {
+    console.log('Genita ma e mira n bote');
+    // Handle the response from the get client details API endpoint
+    if (response.success) {
+            console.log('oooo bre Genita hala ma e mira n bote');
+
+
+            console.log('ooooj lind breee');
+        // Client details retrieved successfully and response.data is not empty
+        fillFormWithData(response.data);
+
+
+=======
+function handleGetClientDetailsResponseById(response) {
+    // Handle the response from the get client details API endpoint
+    if (response.success) {
+        // Client details retrieved successfully and response.data is not empty
+        fillFormWithData(response.data);
+>>>>>>> Stashed changes
+    }
+     else {
+        // Client details retrieval failed
+        const errorMessage = response.errors || 'Client details retrieval failed.';
+        console.error('Error:', errorMessage);
+
+        // You can display an error message to the user.
+    }
+}
+
+<<<<<<< Updated upstream
+
+
+function fillFormWithData(clientData) {
+    console.log("HErolindiiiiii");
+=======
+function fillFormWithData(clientData) {
+>>>>>>> Stashed changes
+    // Set values in the input elements based on clientData
+    document.getElementById('id').value = clientData.id || '';
+    document.getElementById('IdCardClient').value = clientData.idCardNumber || '';
+    document.getElementById('name').value = clientData.name || '';
+    document.getElementById('surname').value = clientData.surname || '';
+    document.getElementById('pin').value = clientData.pin || ''; // Assuming Pin is the property name
+    document.getElementById('address').value = clientData.address || '';
+    document.getElementById('phoneNumber').value = clientData.phoneNumber || '';
+    document.getElementById('email').value = clientData.email || '';
+<<<<<<< Updated upstream
+    console.log("Genita" + document.getElementById('id').value);
+    
+}
+
+
+
+    function handleUpdateClientResponse(response) {
+        console.log('Geniii');
+        if (response.success) {
+            console.log('Client updated successfully.');
+            window.location.href="../Client/Index.html";
+            // You can perform any additional actions after a successful update.
+            // For example, you might want to redirect the user to another page.
+        } else {
+            // Update failed
+            const errorMessage = response.errors || 'Client update failed.';
+            console.error('Error:', errorMessage);
+            // You can display an error message to the user.
+        }
+}
+
+
+function editFormClient() {
+    console.log('mrena funksionit');
+        const idValue = localStorage.getItem('clientId');
+      console.log(idValue);
+      console.log("Genitaaa ma e mira n bottttt ");
+        const updateClientUrl = `https://localhost:7190/User/UpdateClient/${idValue}`;
+
+        const authToken = localStorage.getItem('authToken');
+        // Assuming you have collected the updated data from the form
+        const data = {
+            surname: document.getElementById('surname').value,
+            phoneNumber: document.getElementById('phoneNumber').value,
+            email: document.getElementById('email').value
+        };
+    console.log(data);
+
+}
+
+
+=======
+    
+}
+
+function editFormClient() {
+    const pathUrl = new URLSearchParams(window.location.search);
+    const pathUrlId = pathUrl.get('id');
+    const updateClientUrl = `https://localhost:7190/User/client/${pathUrlId}`;
+
+    const authToken = localStorage.getItem('authToken');
+    
+    const data = {
+        surname: document.getElementById('surname').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        email: document.getElementById('email').value
+    };
+
+    fetch(updateClientUrl, {
+        method: 'PUT',
+        headers: {
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => handleUpdateClientResponse(data))
+    .catch(error => console.error('Error:', error));
+}
+
+function handleUpdateClientResponse(response) {
+    if (response.success) {
+        console.log('Client updated successfully.');
+        window.location.href="../Client/Index.html";
+    } else {
+        const errorMessage = response.errors || 'Client update failed.';
+        console.error('Error:', errorMessage);
+    }
+}
+>>>>>>> Stashed changes
+</script>
